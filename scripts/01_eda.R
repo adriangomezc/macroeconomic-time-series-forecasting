@@ -1,20 +1,15 @@
 library(tidyverse)
 library(forecast)
-library(feasts)
-library(tsibble)
 library(patchwork)
-library(lubridate)
 
 # --------------------------------------------------
 # Load data
 # --------------------------------------------------
 
-df <- read.csv("data/spain_eu_imports.csv")
-
-df$Date <- as.Date(df$Date)
+df <- read.csv("data/IntraEU_Espana.csv")
 
 imports_ts <- ts(
-  df$Imports,
+  df$Importaciones,
   start = c(2000, 1),
   frequency = 12
 )
@@ -58,7 +53,7 @@ ggsave(
 )
 
 # --------------------------------------------------
-# Annual aggregation
+# Annual trend
 # --------------------------------------------------
 
 annual_ts <- aggregate(imports_ts, FUN = sum)
@@ -131,7 +126,7 @@ plot(decomp)
 dev.off()
 
 # --------------------------------------------------
-# Variance analysis
+# Variance stability analysis
 # --------------------------------------------------
 
 annual_mean <- aggregate(imports_ts, FUN = mean)
@@ -162,26 +157,21 @@ ggsave(
 )
 
 # --------------------------------------------------
-# Shock / intervention detection
+# Outlier detection
 # --------------------------------------------------
 
-z_scores <- scale(imports_ts)
+outliers <- tsoutliers(imports_ts)
 
-shock_idx <- which(abs(z_scores) > 2.5)
-
-shock_dates <- time(imports_ts)[shock_idx]
-
-shock_values <- imports_ts[shock_idx]
-
-interventions <- data.frame(
-  Date = as.character(shock_dates),
-  Value = as.numeric(shock_values)
+outlier_df <- data.frame(
+  Index = outliers$index,
+  Time = time(imports_ts)[outliers$index],
+  Value = imports_ts[outliers$index]
 )
 
 write.csv(
-  interventions,
+  outlier_df,
   "outputs/intervention_points.csv",
   row.names = FALSE
 )
 
-print(interventions)
+print(outlier_df)
