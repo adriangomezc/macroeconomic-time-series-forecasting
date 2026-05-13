@@ -1,10 +1,3 @@
-
-Ahora crea:
-`scripts/01_eda.R`
-
-y pega EXACTAMENTE esto.
-
-```r
 library(tidyverse)
 library(forecast)
 library(feasts)
