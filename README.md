@@ -46,6 +46,9 @@ macroeconomic-time-series-forecasting/
 ├── README.md
 └── .gitignore
 ```
+
+---
+
 # Methodology
 
 Current stage:
@@ -66,6 +69,8 @@ Future stages:
 - Calendar effects
 - Forecast comparison
 
+---
+
 # Main findings (current stage)
 
 Preliminary exploratory analysis reveals:
@@ -75,6 +80,8 @@ Preliminary exploratory analysis reveals:
 - Evidence of changing volatility during high-volume periods
 - Persistent macroeconomic cycles
 
+---
+
 # Technologies
 - R
 - tidyverse
@@ -83,6 +90,8 @@ Preliminary exploratory analysis reveals:
 - tsibble
 - feasts
 - patchwork
+
+---
 
 # Author
 
