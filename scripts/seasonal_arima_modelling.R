@@ -24,7 +24,7 @@ library(gridExtra)
 imports <- read.csv("data/IntraEU_Espana.csv")
 
 imports_ts <- ts(
-  imports$Importaciones,
+  imports$Imports,
   start = c(2000, 1),
   frequency = 12
 )
