@@ -1,31 +1,28 @@
 # Macroeconomic Time Series Forecasting: Spain–EU Imports
 
-> An applied forecasting pipeline for modelling Spanish imports from European countries using exploratory time series analysis, exponential smoothing, rolling-origin validation and structural macroeconomic interpretation.
+> An applied forecasting project focused on modelling Spanish imports from European countries using exploratory time series analysis, exponential smoothing (ETS), intervention analysis and rolling-origin validation.
 
-The project combines statistical forecasting, out-of-sample evaluation and economic interpretation to simulate a real-world macroeconomic analytics workflow.
+The project reproduces a realistic macroeconomic forecasting workflow used in consulting, supply-chain analytics and economic monitoring environments.
 
----
-
-# Business Context
+## Business Context
 
 International trade volumes are highly sensitive to:
 
-* Macroeconomic cycles
-* Industrial demand
+* Economic cycles
+* Industrial production
 * Supply-chain disruptions
-* External geopolitical shocks
-* Logistics bottlenecks
-* Calendar and seasonal effects
+* Seasonal logistics patterns
+* Global shocks and crises
 
-Reliable import forecasting is valuable for:
+Reliable forecasting of import volumes is valuable for:
 
-* Supply chain optimisation
-* Industrial production planning
-* Logistics capacity management
-* Economic monitoring
-* Risk management during crises
+* Demand planning
+* Logistics optimisation
+* Inventory management
+* Macroeconomic surveillance
+* Risk management
 
-This project analyses monthly Spanish imports from European countries between January 2000 and May 2025 using Eurostat data.
+This project analyses monthly Spanish imports from European countries between January 2000 and May 2025 using official Eurostat data.
 
 ---
 
@@ -41,162 +38,12 @@ The series exhibits:
 * Long-term macroeconomic trend
 * Strong annual seasonality
 * Structural breaks
-* Extreme interventions
-* Volatility clustering
-* Calendar-related distortions
+* Extreme external shocks
+* Volatility changes over time
 
 ---
 
-# Phase 1 — Exploratory Time Series Analysis
-
-The first phase focused on identifying the structural components of the series and detecting major macroeconomic interventions.
-
-## Main Outputs
-
-| Output                        | Description                                                   |
-| ----------------------------- | ------------------------------------------------------------- |
-| `main_series.png`             | Original monthly import series                                |
-| `annual_trend.png`            | Aggregated annual macroeconomic trend                         |
-| `seasonality.png`             | Seasonal subseries and yearly seasonality plots               |
-| `classical_decomposition.png` | Classical decomposition into trend, seasonality and residuals |
-| `variance_diagnostics.png`    | Mean-variance diagnostics                                     |
-| `outlier_dates.csv`           | Detected anomaly dates                                        |
-| `summary_statistics.csv`      | Descriptive statistics                                        |
-
-## Key Findings
-
-### Trend structure
-
-The series reflects several major macroeconomic phases:
-
-* Sustained expansion before 2008
-* Severe contraction during the global financial crisis
-* Gradual post-crisis recovery
-* Abrupt pandemic-related disruption in 2020
-
-### Seasonality
-
-A strong and persistent annual seasonal pattern is observed:
-
-* August systematically presents the lowest import levels.
-* March and October consistently show peak activity.
-
-This behaviour is coherent with Spanish industrial and logistics seasonality.
-
-### Structural interventions
-
-Residual diagnostics identified major outlier periods linked to:
-
-* The 2008 financial crisis
-* COVID-19 supply-chain disruption
-
-These interventions become critical inputs for later forecasting models.
-
-### Variance structure
-
-Variance diagnostics suggest periods of volatility amplification during high-volume regimes, motivating additional modelling evaluation during forecasting stages.
-
----
-
-# Phase 2 — Exponential Smoothing & Forecasting
-
-The second phase focused on predictive modelling using Exponential Smoothing State Space Models (ETS).
-
-The objective was not only to optimise in-sample fit, but to evaluate genuine forecasting performance under rolling-origin validation.
-
----
-
-## Forecasting Methodology
-
-Several forecasting approaches were evaluated:
-
-* Automatic ETS selection
-* Manual ETS(A,A,A)
-* Seasonal naïve benchmark (`snaive`)
-
-Model performance was assessed through:
-
-* Rolling-origin cross-validation
-* Multi-horizon forecasting evaluation
-* Out-of-sample error comparison
-
-Evaluation metrics included:
-
-* RMSE
-* MAE
-* MAPE
-
----
-
-# Phase 2 Outputs
-
-| Output                           | Description                                               |
-| -------------------------------- | --------------------------------------------------------- |
-| `model_comparison.csv`           | Comparative performance metrics across forecasting models |
-| `rolling_origin_performance.png` | Rolling-origin forecasting performance                    |
-| `rolling_origin_metrics.csv`     | Detailed rolling validation errors                        |
-| `ets_forecast.png`               | Final ETS multi-step forecast                             |
-| `residual_diagnostics.png`       | Residual diagnostics and autocorrelation analysis         |
-| `residual_outliers.csv`          | Extreme residual events detected after ETS modelling      |
-
----
-
-# Key Forecasting Findings
-
-## ETS performance
-
-Exponential smoothing models substantially outperformed the seasonal naïve benchmark.
-
-The best-performing ETS specification achieved:
-
-* Lower forecasting error
-* More stable multi-horizon predictions
-* Better adaptation to structural level changes
-
-This demonstrates that statistical modelling captures relevant market dynamics beyond simple seasonal repetition.
-
----
-
-## Rolling-origin validation
-
-Rather than relying exclusively on in-sample fit, the models were evaluated using rolling forecasting origin validation.
-
-This approach simulates real operational forecasting conditions by repeatedly:
-
-1. Training on historical data
-2. Forecasting unseen future observations
-3. Measuring forecasting error
-
-The ETS framework consistently maintained lower prediction error across multiple horizons compared with naïve forecasting.
-
----
-
-## Forecast dynamics
-
-The final ETS forecast preserves:
-
-* Stable long-term trend
-* Strong annual seasonality
-* Increasing uncertainty over time
-
-Prediction intervals widen progressively, reflecting realistic forecasting uncertainty in macroeconomic systems.
-
----
-
-## Residual diagnostics
-
-Residual analysis indicates that most systematic structure was successfully captured by the ETS model.
-
-However, several residual spikes remain associated with exceptional macroeconomic events, particularly:
-
-* January 2008
-* Pandemic-related disruptions
-
-These events motivate the inclusion of intervention variables and calendar effects in later SARIMA modelling.
-
----
-
-# Repository Structure
+# Project Structure
 
 ```text
 macroeconomic-time-series-forecasting/
@@ -211,8 +58,8 @@ macroeconomic-time-series-forecasting/
 │   │   ├── classical_decomposition.png
 │   │   ├── variance_diagnostics.png
 │   │   ├── rolling_origin_performance.png
-│   │   ├── ets_forecast.png
-│   │   └── residual_diagnostics.png
+│   │   ├── residual_diagnostics.png
+│   │   └── ets_forecast.png
 │   │
 │   └── tables/
 │       ├── summary_statistics.csv
@@ -223,11 +70,194 @@ macroeconomic-time-series-forecasting/
 │
 ├── scripts/
 │   ├── exploratory_analysis.R
-│   └── ets_forecasting.R
+│   └── ets_modelling.R
 │
 ├── README.md
 └── LICENSE
 ```
+
+---
+
+# Phase 1 — Exploratory Time Series Analysis
+
+The first stage focused on identifying the structural properties of the series before statistical modelling.
+
+## Main Outputs
+
+| Output                        | Description                              |
+| ----------------------------- | ---------------------------------------- |
+| `main_series.png`             | Original monthly import series           |
+| `annual_trend.png`            | Aggregated annual macroeconomic trend    |
+| `seasonality.png`             | Monthly subseries and seasonal structure |
+| `classical_decomposition.png` | Trend-seasonal-residual decomposition    |
+| `variance_diagnostics.png`    | Mean-variance diagnostics                |
+| `outlier_dates.csv`           | Detected extreme events                  |
+| `summary_statistics.csv`      | Descriptive statistics                   |
+
+## Main Findings
+
+### Trend Structure
+
+The series follows the European macroeconomic cycle closely:
+
+* Sustained expansion before 2008
+* Severe contraction during the financial crisis
+* Progressive post-crisis recovery
+* Abrupt COVID-19 shock in 2020
+
+### Seasonality
+
+A strong and persistent seasonal pattern is observed:
+
+* August systematically records the lowest import activity.
+* March and October consistently present the highest volumes.
+
+This behaviour reflects industrial shutdowns, logistics seasonality and commercial campaign cycles.
+
+### Structural Interventions
+
+Residual analysis identified extreme deviations associated with:
+
+* The 2008 global financial crisis
+* Pandemic-related supply-chain disruption
+
+These events motivate the inclusion of intervention variables in later forecasting models.
+
+### Variance Dynamics
+
+Variance diagnostics suggest occasional volatility amplification during periods of exceptionally high import activity, motivating evaluation of alternative modelling specifications during forecasting stages.
+
+---
+
+# Phase 2 — Exponential Smoothing Models (ETS)
+
+The second phase focused on predictive modelling using Exponential Smoothing State Space Models (ETS).
+
+The objective was not only to obtain accurate forecasts, but also to evaluate model robustness under realistic out-of-sample conditions.
+
+---
+
+# Methodology
+
+## Model Candidates
+
+Several forecasting approaches were evaluated:
+
+* Automatic ETS optimisation
+* Fixed ETS(A,A,A)
+* Seasonal naïve benchmark (`snaive`)
+* ETS variants with alternative optimisation strategies
+
+## Rolling-Origin Cross-Validation
+
+Instead of relying only on in-sample fit, models were evaluated through rolling-origin forecasting validation.
+
+This procedure repeatedly simulates historical forecasting exercises using moving training windows and future holdout periods.
+
+Evaluation metrics included:
+
+* RMSE
+* MAE
+* MAPE
+* MPE
+
+This framework provides a more realistic estimate of forecasting performance under production conditions.
+
+---
+
+# ETS Outputs
+
+| Output                           | Description                                            |
+| -------------------------------- | ------------------------------------------------------ |
+| `model_comparison.csv`           | Forecasting performance comparison across ETS variants |
+| `rolling_origin_performance.png` | Cross-validation performance across forecast horizons  |
+| `rolling_origin_metrics.csv`     | Detailed rolling-origin metrics                        |
+| `residual_diagnostics.png`       | Residual behaviour and model diagnostics               |
+| `residual_outliers.csv`          | Extreme residual events                                |
+| `ets_forecast.png`               | Final multi-step ETS forecast                          |
+
+---
+
+# Key Results
+
+## Best Performing Model
+
+Automatic ETS optimisation achieved the best overall forecasting performance.
+
+### Final Performance
+
+| Metric | Value |
+| ------ | ----- |
+| MAPE   | 2.77% |
+| MPE    | -2.1% |
+
+The model substantially outperformed:
+
+* Seasonal naïve benchmark
+* Manual ETS(A,A,A) specification
+
+This indicates strong predictive capacity and low forecast bias.
+
+---
+
+## Rolling-Origin Validation
+
+Cross-validation results showed that ETS maintained:
+
+* Lower prediction errors
+* Greater stability
+* Better robustness across forecast horizons
+
+compared with the naïve benchmark.
+
+The performance gap remained consistent across multiple forecasting windows, reducing the risk of overfitting.
+
+---
+
+## Residual Analysis
+
+Residual diagnostics suggest that the ETS model successfully captured:
+
+* Long-term trend
+* Seasonal dynamics
+* Most systematic temporal structure
+
+Residuals fluctuate approximately around zero with limited autocorrelation.
+
+However, an extreme positive residual was detected in:
+
+* January 2008
+
+This corresponds to a major structural shock associated with the financial crisis and will later be incorporated as an intervention variable within ARIMA modelling.
+
+---
+
+## Forecast Behaviour
+
+The final ETS forecast projects:
+
+* Relative macroeconomic stabilisation
+* Persistent seasonal oscillations
+* Moderate long-term uncertainty expansion
+
+The model preserves realistic monthly import dynamics, including:
+
+* August seasonal collapses
+* Strong campaign-related peaks
+
+Prediction intervals widen progressively as the forecasting horizon increases.
+
+---
+
+# Next Phase
+
+The next stage of the project will extend forecasting capabilities using:
+
+* Seasonal ARIMA models
+* Calendar effects (trading days and Easter effects)
+* Intervention analysis
+* Structural shock correction
+* Comparative forecasting evaluation
 
 ---
 
@@ -241,22 +271,6 @@ macroeconomic-time-series-forecasting/
 * tsibble
 * feasts
 * tseries
-* gridExtra
-
----
-
-# Next Steps
-
-The next modelling stage will extend the pipeline using:
-
-* Seasonal ARIMA (SARIMA)
-* Intervention analysis
-* Trading-day effects
-* Easter effects
-* Automatic seasonal adjustment
-* Calendar-aware forecasting
-* Advanced residual diagnostics
-* Comparative model selection
 
 ---
 
