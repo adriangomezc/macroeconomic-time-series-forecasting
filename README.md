@@ -45,3 +45,48 @@ macroeconomic-time-series-forecasting/
 │
 ├── README.md
 └── .gitignore
+```
+# Methodology
+
+Current stage:
+
+- Exploratory data analysis (EDA)
+- Trend analysis
+- Seasonal decomposition
+- Outlier detection
+- Variance diagnostics
+- Structural shock exploration
+
+Future stages:
+
+- ETS forecasting
+- Rolling origin validation
+- SARIMA modelling
+- Intervention analysis
+- Calendar effects
+- Forecast comparison
+
+# Main findings (current stage)
+
+Preliminary exploratory analysis reveals:
+- Strong annual seasonality
+- Major structural shocks during 2008–2009 and 2020
+- Stable monthly seasonal structure
+- Evidence of changing volatility during high-volume periods
+- Persistent macroeconomic cycles
+
+# Technologies
+- R
+- tidyverse
+- forecast
+- ggplot2
+- tsibble
+- feasts
+- patchwork
+
+# Author
+
+Adrián Gómez Conde
+
+MSc Biostatistics candidate
+Statistical modelling and applied data analysis
