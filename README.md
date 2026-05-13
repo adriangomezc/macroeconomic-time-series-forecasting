@@ -48,6 +48,17 @@ The series exhibits:
 
 ---
 
+# Key Results
+
+| Task | Best Model | Main Result |
+|---|---|---|
+| Monthly forecasting | ETS Auto | MAPE = 2.77% |
+| Annual macroeconomic modelling | ARIMA(1,0,0) | MAPE = 4.12% |
+| Seasonal structural forecasting | SARIMA + exogenous variables | Captured intervention and calendar effects |
+| Final forecasting benchmark | ETS | Outperformed SARIMA on short-term forecasting |
+
+---
+
 # Project Structure
 
 ```text
@@ -96,8 +107,9 @@ macroeconomic-time-series-forecasting/
 │   └── seasonal_arima_modelling.R
 │
 ├── README.md
+├── .gitignore
 └── LICENSE
-```
+````
 
 ---
 
@@ -325,11 +337,11 @@ The annual forecast projected relative macroeconomic stabilisation around approx
 
 ---
 
-# Phase 4 — Seasonal ARIMA with Exogenous Variables
+# Phase 4 — Comparative Seasonal Forecasting Framework
 
 The final stage extended forecasting capabilities using Seasonal ARIMA models combined with intervention analysis and calendar-related exogenous variables.
 
-This phase corrected the methodological limitations identified in earlier versions of the project, including over-differencing and missing calendar effects.
+This phase incorporated seasonal dynamics, structural shocks and trading-day effects into the forecasting framework.
 
 ---
 
@@ -403,11 +415,11 @@ The intervention analysis quantified the January 2008 shock as:
 | ----------------- | ------------------- |
 | 2008 intervention | +1684.53 kilotonnes |
 
-This confirms the exceptional magnitude of the financial crisis shock relative to the normal market dynamics.
+This confirms the exceptional magnitude of the financial crisis shock relative to normal market dynamics.
 
 ### Calendar Effects
 
-The trading-day variable demonstrated that month duration significantly influences import volume dynamics.
+The trading-day variable demonstrated that month duration significantly influences import dynamics.
 
 | Variable     | Estimated Effect     |
 | ------------ | -------------------- |
@@ -434,7 +446,7 @@ Residual autocorrelation remained well controlled after modelling.
 
 ### Final Benchmark Comparison
 
-An important empirical result emerged from the final forecasting comparison:
+An important empirical result emerged from the final forecasting benchmark:
 
 | Model  | MAPE  |
 | ------ | ----- |
@@ -455,8 +467,23 @@ Both ETS and SARIMA projected:
 
 However:
 
-* SARIMA produced smoother and more conservative seasonal projections
-* ETS captured aggressive seasonal peaks and troughs more effectively
+* SARIMA generated smoother and more structurally constrained forecasts
+* ETS captured short-term seasonal fluctuations more flexibly
+
+---
+
+# Main Statistical Techniques
+
+* Classical time series decomposition
+* Exponential smoothing state-space models (ETS)
+* ARIMA and SARIMA modelling
+* Rolling-origin cross-validation
+* Intervention analysis
+* Calendar effect modelling
+* Residual diagnostics
+* Stationarity testing
+* Multi-horizon forecasting evaluation
+* Forecast benchmarking
 
 ---
 
@@ -472,6 +499,28 @@ However:
 * tseries
 * seasonal
 * tsoutliers
+
+---
+
+# Required Packages
+
+forecast
+ggplot2
+tidyverse
+lubridate
+tseries
+seasonal
+tsoutliers
+feasts
+tsibble
+
+---
+
+# Reproducibility
+
+All analyses were developed in R.
+
+Each project phase is fully reproducible through the scripts contained in the `/scripts` directory. Figures and tables are automatically exported to the `/outputs` folder.
 
 ---
 
