@@ -281,5 +281,7 @@ This phase will move the project closer to real-world economic forecasting syste
 # Author
 
 **Adrián Gómez Conde**
+
 MSc Biostatistics Candidate
+
 Statistical Modelling · Forecasting · Applied Data Analysis
