@@ -8,7 +8,7 @@ library(patchwork)
 # Load data
 # =========================
 
-df <- read.csv("data/intraEU_spain_imports.csv")
+df <- read.csv("data/intraEU_Espana.csv")
 
 imports_ts <- ts(
   df$Imports,
