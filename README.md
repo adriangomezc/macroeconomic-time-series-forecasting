@@ -105,6 +105,7 @@ The first stage focused on identifying the structural properties of the series b
 ### Main Findings
 
 **Trend Structure**
+
 The series follows the European macroeconomic cycle closely:
 
 * Sustained expansion before 2008
@@ -113,6 +114,7 @@ The series follows the European macroeconomic cycle closely:
 * Abrupt COVID-19 shock in 2020
 
 **Seasonality**
+
 A strong and persistent seasonal pattern is observed:
 
 * August systematically records the lowest import activity.
@@ -121,6 +123,7 @@ A strong and persistent seasonal pattern is observed:
 This behaviour reflects industrial shutdowns, logistics seasonality and commercial campaign cycles.
 
 **Structural Interventions**
+
 Residual analysis identified extreme deviations associated with:
 
 * The 2008 global financial crisis
@@ -129,6 +132,7 @@ Residual analysis identified extreme deviations associated with:
 These events motivate the inclusion of intervention variables in later forecasting models.
 
 **Variance Dynamics**
+
 Variance diagnostics suggest occasional volatility amplification during periods of exceptionally high import activity.
 
 ---
@@ -140,6 +144,7 @@ The second phase focused on predictive modelling using Exponential Smoothing Sta
 ### Methodology
 
 **Forecasting Models**
+
 Several forecasting approaches were evaluated:
 
 * Automatic ETS optimisation
@@ -148,6 +153,7 @@ Several forecasting approaches were evaluated:
 * Alternative ETS optimisation criteria
 
 **Rolling-Origin Cross-Validation**
+
 Models were evaluated using rolling-origin forecasting validation instead of relying exclusively on in-sample fit. This approach repeatedly simulates historical forecasting exercises under changing training windows.
 Evaluation metrics included RMSE, MAE, MAPE, and MPE.
 
@@ -165,6 +171,7 @@ Evaluation metrics included RMSE, MAE, MAPE, and MPE.
 ### Key Results
 
 **Best Performing ETS Model**
+
 Automatic ETS optimisation achieved the strongest forecasting performance.
 
 | Metric | Value |
@@ -175,9 +182,11 @@ Automatic ETS optimisation achieved the strongest forecasting performance.
 The model substantially outperformed both the Seasonal naïve benchmark and the manual ETS(A,A,A) specification. Cross-validation results demonstrated stable forecasting behaviour across prediction horizons, reducing the risk of overfitting.
 
 **Residual Behaviour**
+
 Residual diagnostics indicate that the ETS framework successfully captured the long-term trend, seasonal structure, and most systematic temporal dynamics. An extreme residual event was detected in January 2008, corresponding to the global financial crisis.
 
 **Forecast Behaviour**
+
 The ETS forecast projects relative macroeconomic stabilisation, persistent seasonal oscillations, and gradual uncertainty expansion over longer horizons.
 
 ---
@@ -189,12 +198,15 @@ The third phase focused on statistical modelling of the long-term macroeconomic 
 ### Methodology
 
 **Annual Aggregation**
+
 Monthly imports were aggregated into annual totals to remove high-frequency seasonality, isolate macroeconomic trend behaviour, and simplify long-run structural modelling.
 
 **Stationarity Analysis**
+
 Stationarity diagnostics included KPSS tests, Augmented Dickey-Fuller tests, and automatic differencing diagnostics (`ndiffs()`). Results indicated that the annual series was already stationary in levels.
 
 **ARIMA Estimation**
+
 Model selection was performed using automatic ARIMA optimisation, exhaustive parameter search, and information criteria minimisation. The final specification selected by the algorithm was **ARIMA(1,0,0) with non-zero mean**. This indicates that annual import dynamics are primarily explained by persistence from the immediately previous year.
 
 ### ARIMA Outputs
@@ -212,6 +224,7 @@ Model selection was performed using automatic ARIMA optimisation, exhaustive par
 ### Main ARIMA Findings
 
 **Stationarity**
+
 The annual series was found to be stationary without differencing:
 
 | Metric | Result |
@@ -221,9 +234,11 @@ The annual series was found to be stationary without differencing:
 This simplified model interpretation and reduced unnecessary transformations.
 
 **Selected Model**
+
 The optimal model identified was **ARIMA(1,0,0)**. The model is parsimonious and economically interpretable, suggesting strong year-to-year persistence in Spanish import volumes.
 
 **Benchmark Comparison**
+
 When evaluated against ETS on annual data:
 
 | Model | MAPE |
@@ -234,6 +249,7 @@ When evaluated against ETS on annual data:
 ARIMA achieved superior performance for long-run macroeconomic dynamics, while ETS remained stronger for short-term seasonal forecasting.
 
 **Long-Term Forecast**
+
 The annual ARIMA forecast projects relative macroeconomic stabilisation over the coming years, with volumes remaining approximately around 77,000 kilotonnes annually.
 
 ---
