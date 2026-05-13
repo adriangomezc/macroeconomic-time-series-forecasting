@@ -113,5 +113,5 @@ The next phase of the project will include:
 ## Author
 
 **Adrián Gómez Conde** 
-*MSc Biostatistics Candidate
-*Statistical Modelling · Forecasting · Applied Data Analysis
+MSc Biostatistics Candidate
+Statistical Modelling · Forecasting · Applied Data Analysis
