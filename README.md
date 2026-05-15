@@ -1,11 +1,3 @@
-# Macroeconomic Time Series Forecasting: Spain–EU Imports
-
-> An end-to-end macroeconomic forecasting project focused on modelling Spanish imports from European countries using exploratory analysis, exponential smoothing (ETS), ARIMA methodologies, intervention analysis and seasonal forecasting with exogenous variables.
-
-The project reproduces a realistic forecasting workflow commonly used in consulting, economic intelligence, supply-chain analytics and industrial planning environments.
-
----
-
 ## Business Context
 
 International trade flows are strongly influenced by:
