@@ -1,3 +1,11 @@
+# Macroeconomic Time Series Forecasting: Spain–EU Imports
+
+> An end-to-end macroeconomic forecasting project focused on modelling Spanish imports from European countries using exploratory analysis, exponential smoothing (ETS), ARIMA methodologies, intervention analysis and seasonal forecasting with exogenous variables.
+
+The project reproduces a realistic forecasting workflow commonly used in consulting, economic intelligence, supply-chain analytics and industrial planning environments.
+
+---
+
 ## Business Context
 
 International trade flows are strongly influenced by:
@@ -43,8 +51,8 @@ The series exhibits:
 # Key Results
 
 | Task | Best Model | Main Result |
-|---|---|---|
-| Monthly forecasting | ETS Auto | MAPE = 2.77% |
+| --- | --- | --- |
+| Monthly forecasting | ETS Auto | Out-of-sample MAPE = 7.39% |
 | Annual macroeconomic modelling | ARIMA(1,0,0) | MAPE = 4.12% |
 | Seasonal structural forecasting | SARIMA + exogenous variables | Captured intervention and calendar effects |
 | Final forecasting benchmark | ETS | Outperformed SARIMA on short-term forecasting |
@@ -101,7 +109,8 @@ macroeconomic-time-series-forecasting/
 ├── README.md
 ├── .gitignore
 └── LICENSE
-````
+
+```
 
 ---
 
@@ -111,15 +120,15 @@ The first stage focused on identifying the structural properties of the series b
 
 ## Main Outputs
 
-| Output                        | Description                              |
-| ----------------------------- | ---------------------------------------- |
-| `main_series.png`             | Original monthly import series           |
-| `annual_trend.png`            | Aggregated annual macroeconomic trend    |
-| `seasonality.png`             | Monthly subseries and seasonal structure |
-| `classical_decomposition.png` | Trend-seasonal-residual decomposition    |
-| `variance_diagnostics.png`    | Mean-variance diagnostics                |
-| `outlier_dates.csv`           | Detected extreme events                  |
-| `summary_statistics.csv`      | Descriptive statistics                   |
+| Output | Description |
+| --- | --- |
+| `main_series.png` | Original monthly import series |
+| `annual_trend.png` | Aggregated annual macroeconomic trend |
+| `seasonality.png` | Monthly subseries and seasonal structure |
+| `classical_decomposition.png` | Trend-seasonal-residual decomposition |
+| `variance_diagnostics.png` | Mean-variance diagnostics |
+| `outlier_dates.csv` | Detected extreme events |
+| `summary_statistics.csv` | Descriptive statistics |
 
 ## Main Findings
 
@@ -152,7 +161,7 @@ These events motivated the later inclusion of intervention variables in forecast
 
 ### Variance Dynamics
 
-Variance diagnostics suggested occasional volatility amplification during exceptionally high import regimes, motivating additional modelling evaluation in later stages.
+Variance diagnostics suggested occasional volatility amplification during exceptionally high import regimes, motivating additional modelling evaluation in later stages and careful consideration of data transformations (e.g., logarithmic scale).
 
 ---
 
@@ -192,14 +201,14 @@ This framework repeatedly simulated historical forecasting exercises under chang
 
 ## ETS Outputs
 
-| Output                           | Description                        |
-| -------------------------------- | ---------------------------------- |
-| `model_comparison.csv`           | Forecasting performance comparison |
-| `rolling_origin_performance.png` | Forecast accuracy across horizons  |
-| `rolling_origin_metrics.csv`     | Detailed validation metrics        |
-| `residual_diagnostics.png`       | Residual diagnostics               |
-| `residual_outliers.csv`          | Extreme residual events            |
-| `ets_forecast.png`               | Multi-step ETS forecast            |
+| Output | Description |
+| --- | --- |
+| `model_comparison.csv` | Forecasting performance comparison |
+| `rolling_origin_performance.png` | Forecast accuracy across horizons |
+| `rolling_origin_metrics.csv` | Detailed validation metrics |
+| `residual_diagnostics.png` | Residual diagnostics |
+| `residual_outliers.csv` | Extreme residual events |
+| `ets_forecast.png` | Multi-step ETS forecast |
 
 ---
 
@@ -210,16 +219,18 @@ This framework repeatedly simulated historical forecasting exercises under chang
 Automatic ETS optimisation achieved the strongest predictive performance.
 
 | Metric | Value |
-| ------ | ----- |
-| MAPE   | 2.77% |
-| MPE    | -2.1% |
+| --- | --- |
+| In-Sample MAPE | 2.77% |
+| Validation MAPE | 7.39% |
+
+*Note: It is critical to distinguish between in-sample fit (2.77%) and true out-of-sample forecasting ability (7.39%), as highly seasonal macroeconomic series are prone to overfitting.*
 
 The ETS framework substantially outperformed both:
 
 * Seasonal naïve benchmark
 * Manual ETS(A,A,A)
 
-Cross-validation results demonstrated stable forecasting behaviour across multiple horizons, reducing overfitting risk.
+Cross-validation results demonstrated stable forecasting behaviour across multiple horizons.
 
 ### Residual Behaviour
 
@@ -238,11 +249,6 @@ The ETS forecast projected:
 * Relative macroeconomic stabilisation
 * Persistent seasonal oscillations
 * Gradual uncertainty expansion
-
-The model reproduced realistic monthly behaviour, including:
-
-* August seasonal collapses
-* Campaign-related import peaks
 
 ---
 
@@ -268,7 +274,7 @@ Stationarity diagnostics included:
 * Augmented Dickey-Fuller tests
 * Automatic differencing diagnostics
 
-Results indicated that the annual series was already stationary in levels.
+Results for the short annual series ($N \approx 25$) yielded mixed evidence (KPSS suggested $d=0$, while ADF yielded $p=0.22$). Given the low power of unit root tests on short samples and visual evidence of structural changes, the selection process required careful assessment.
 
 ### ARIMA Estimation
 
@@ -282,15 +288,15 @@ This suggests that annual import dynamics are largely explained by persistence f
 
 ## ARIMA Outputs
 
-| Output                         | Description                     |
-| ------------------------------ | ------------------------------- |
-| `annual_series.png`            | Annual aggregated import series |
-| `annual_arima_metrics.csv`     | Stationarity diagnostics        |
-| `arima_orders.csv`             | Selected ARIMA orders           |
-| `annual_arima_diagnostics.png` | Residual diagnostics            |
-| `annual_model_comparison.csv`  | ETS vs ARIMA benchmark          |
-| `ets_vs_arima.png`             | Forecast comparison             |
-| `annual_arima_forecast.png`    | Long-term ARIMA forecast        |
+| Output | Description |
+| --- | --- |
+| `annual_series.png` | Annual aggregated import series |
+| `annual_arima_metrics.csv` | Stationarity diagnostics |
+| `arima_orders.csv` | Selected ARIMA orders |
+| `annual_arima_diagnostics.png` | Residual diagnostics |
+| `annual_model_comparison.csv` | ETS vs ARIMA benchmark |
+| `ets_vs_arima.png` | Forecast comparison |
+| `annual_arima_forecast.png` | Long-term ARIMA forecast |
 
 ---
 
@@ -298,13 +304,7 @@ This suggests that annual import dynamics are largely explained by persistence f
 
 ### Stationarity
 
-The annual series was found to be stationary without differencing.
-
-| Metric                      | Result |
-| --------------------------- | ------ |
-| Recommended differences (d) | 0      |
-
-This simplified interpretation and reduced unnecessary transformations.
+The selected model assumed stationarity without differencing ($d=0$), prioritizing a simplified interpretation while acknowledging the presence of unmodelled macroeconomic cycles.
 
 ### Selected Model
 
@@ -316,16 +316,12 @@ The specification is parsimonious and economically interpretable.
 
 ### Benchmark Comparison
 
-| Model | MAPE  |
-| ----- | ----- |
+| Model | MAPE |
+| --- | --- |
 | ARIMA | 4.12% |
-| ETS   | 5.02% |
+| ETS | 5.02% |
 
 ARIMA outperformed ETS for long-run macroeconomic behaviour, while ETS remained stronger for highly seasonal short-term forecasting.
-
-### Long-Term Forecast
-
-The annual forecast projected relative macroeconomic stabilisation around approximately 77,000 kilotonnes annually over the following years.
 
 ---
 
@@ -350,10 +346,10 @@ Formal stationarity diagnostics were conducted using:
 
 Results showed that the monthly series required:
 
-| Parameter                   | Value |
-| --------------------------- | ----- |
-| Regular differencing (`d`)  | 1     |
-| Seasonal differencing (`D`) | 0     |
+| Parameter | Value |
+| --- | --- |
+| Regular differencing (`d`) | 1 |
+| Seasonal differencing (`D`) | 0 |
 
 This avoided unnecessary over-differencing and preserved the structural properties of the series.
 
@@ -383,17 +379,17 @@ The final model incorporated both seasonal structure and external regressors.
 
 ## SARIMA Outputs
 
-| Output                           | Description                               |
-| -------------------------------- | ----------------------------------------- |
-| `seasonal_tests.csv`             | Stationarity and differencing diagnostics |
-| `seasonal_adjustment.png`        | Seasonal adjustment diagnostics           |
-| `intervention_effects.csv`       | Estimated exogenous effects               |
-| `sarima_metrics.csv`             | Final SARIMA metrics                      |
-| `sarima_diagnostics.png`         | Residual diagnostics                      |
-| `model_residuals_comparison.png` | ETS vs SARIMA residual comparison         |
-| `final_model_comparison.csv`     | Final forecasting benchmark               |
-| `sarima_forecast.png`            | SARIMA forecast                           |
-| `forecast_comparison.png`        | Forecast comparison across models         |
+| Output | Description |
+| --- | --- |
+| `seasonal_tests.csv` | Stationarity and differencing diagnostics |
+| `seasonal_adjustment.png` | Seasonal adjustment diagnostics |
+| `intervention_effects.csv` | Estimated exogenous effects |
+| `sarima_metrics.csv` | Final SARIMA metrics |
+| `sarima_diagnostics.png` | Residual diagnostics |
+| `model_residuals_comparison.png` | ETS vs SARIMA residual comparison |
+| `final_model_comparison.csv` | Final forecasting benchmark |
+| `sarima_forecast.png` | SARIMA forecast |
+| `forecast_comparison.png` | Forecast comparison across models |
 
 ---
 
@@ -403,51 +399,42 @@ The final model incorporated both seasonal structure and external regressors.
 
 The intervention analysis quantified the January 2008 shock as:
 
-| Variable          | Estimated Effect    |
-| ----------------- | ------------------- |
+| Variable | Estimated Effect |
+| --- | --- |
 | 2008 intervention | +1684.53 kilotonnes |
 
-This confirms the exceptional magnitude of the financial crisis shock relative to normal market dynamics.
+Rather than representing the macroeconomic contraction of the crisis itself, this coefficient captures an anomalous positive spike (Additive Outlier) immediately preceding the global financial collapse.
 
 ### Calendar Effects
 
-The trading-day variable demonstrated that month duration significantly influences import dynamics.
+The calendar variable returned an unexpected effect:
 
-| Variable     | Estimated Effect     |
-| ------------ | -------------------- |
+| Variable | Estimated Effect |
+| --- | --- |
 | `days_month` | -9.34 kilotonnes/day |
 
-This validates the importance of incorporating calendar structure into monthly macroeconomic forecasting systems.
+The negative coefficient counterintuitively suggests fewer imports in longer months. This indicates the variable is likely confounding pure trading-day effects with the strong August seasonal drop (a 31-day month with industrial shutdowns), suggesting that future iterations should use "working days" rather than raw month length.
 
 ### Model Diagnostics
 
-Residual diagnostics indicated that the SARIMA framework successfully captured:
+| Metric | Value |
+| --- | --- |
+| MAE | 404.04 kilotonnes |
 
-* Long-term trend
-* Seasonal structure
-* Calendar effects
-* Structural interventions
-
-The final model achieved:
-
-| Metric | Value             |
-| ------ | ----------------- |
-| MAE    | 404.04 kilotonnes |
-
-Residual autocorrelation remained well controlled after modelling.
+Residual diagnostics indicated that while the SARIMA framework successfully captured the main trend and interventions, the ACF plots revealed some remaining unmodelled seasonal structure at lags 12 and 24, indicating the model residuals are not entirely white noise.
 
 ### Final Benchmark Comparison
 
 An important empirical result emerged from the final forecasting benchmark:
 
-| Model  | MAPE  |
-| ------ | ----- |
-| ETS    | 7.39% |
+| Model | MAPE |
+| --- | --- |
+| ETS | 7.39% |
 | SARIMA | 8.11% |
 
-Despite the greater structural sophistication of SARIMA, ETS remained slightly superior for short-to-medium term forecasting accuracy on this specific monthly series.
+*(Note: When comparing models, it is crucial to ensure both MAPEs are calculated on the back-transformed original scale if any logarithmic transformation was applied during the ETS modelling phase).*
 
-This highlights the strong adaptive capacity of exponential smoothing methods under highly seasonal macroeconomic environments.
+Despite the greater structural sophistication of SARIMA, ETS remained slightly superior for short-to-medium term forecasting accuracy on this specific monthly series. This highlights the strong adaptive capacity of exponential smoothing methods under highly seasonal macroeconomic environments.
 
 ### Forecast Behaviour
 
